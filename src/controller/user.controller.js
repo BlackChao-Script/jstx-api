@@ -39,7 +39,6 @@ class UserController {
       },
     };
   }
-
   // 注册
   async register(ctx) {
     const { nickname, user_name, password } = ctx.request.body;

@@ -15,4 +15,5 @@ module.exports = {
   MYSQL_USER,
   MYSQL_PWD,
   MYSQL_DB,
+  JWT_SECRET,
 };

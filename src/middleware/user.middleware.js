@@ -45,7 +45,7 @@ const crpytPassword = async (ctx, next) => {
 const verifyLogin = async (ctx, next) => {
   const { user_name, password } = ctx.request.body;
   try {
-    const res = await getUserInfo({ user_name });
+    const res = await getUerInfo({ user_name });
     if (!res) {
       console.log("用户名不存在", { user_name });
       return ctx.app.emit("error", userNotExistence, ctx);
@@ -58,6 +58,7 @@ const verifyLogin = async (ctx, next) => {
     console.error(err);
     return ctx.app.emit("error", userLoginError, ctx);
   }
+  await next();
 };
 
 module.exports = {
