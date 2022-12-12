@@ -1,18 +1,19 @@
 const { DataTypes } = require("sequelize");
 const seq = require("../db/seq");
+const User = require("./user.model");
 
 const Chitchat = seq.define(
   "jstx_chitchat",
   {
-    sender_id: {
+    friend_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      comment: "发送者id",
+      comment: "好友id",
     },
-    receiver_id: {
+    user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      comment: "接收者id",
+      comment: "用户id",
     },
     sendcontent: {
       type: DataTypes.STRING,
@@ -41,5 +42,9 @@ const Chitchat = seq.define(
 );
 
 // Chitchat.sync({ alter: true });
+
+Chitchat.belongsTo(User, {
+  foreignKey: "friend_id",
+});
 
 module.exports = Chitchat;
