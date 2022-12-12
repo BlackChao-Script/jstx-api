@@ -69,6 +69,7 @@ class UserController {
       return ctx.app.emit("error", userLoginError, ctx);
     }
   }
+
 }
 
 module.exports = new UserController();

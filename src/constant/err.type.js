@@ -30,4 +30,20 @@ module.exports = {
     message: "用户登录失败",
     result: "",
   },
+  TokenExpiredError: {
+    code: "10008",
+    message: "token已过期",
+    result: "",
+  },
+  invalidToken: {
+    code: "10009",
+    message: "无效token",
+    result: "",
+  },
+  // 聊天错误
+  getChitchatError: {
+    code: "10010",
+    message: "获取聊天列表数据失败",
+    result: "",
+  },
 };

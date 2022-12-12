@@ -1,4 +1,7 @@
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+
+const { JWT_SECRET } = require("../constant/data");
 const {
   userFormateError,
   userAlreadyExited,
@@ -6,8 +9,11 @@ const {
   userNotExistence,
   invalidPassword,
   userLoginError,
+  TokenExpiredError,
+  invalidToken,
 } = require("../constant/err.type");
 const { getUerInfo } = require("../service/user.service");
+
 // 处理用户或密码是否为空中间件
 const userValidator = async (ctx, next) => {
   const { user_name, password } = ctx.request.body;
@@ -60,10 +66,30 @@ const verifyLogin = async (ctx, next) => {
   }
   await next();
 };
+// 判断token中间件
+const auth = async (ctx, next) => {
+  const { authorization = "" } = ctx.request.header;
+  const token = authorization.replace("Bearer ", "");
+  try {
+    const user = jwt.verify(token, JWT_SECRET);
+    ctx.state.user = user;
+  } catch (err) {
+    switch (err.name) {
+      case "TokenExpiredError":
+        console.error("token已过期", err);
+        return ctx.app.emit("error", TokenExpiredError, ctx);
+      case "JsonWebTokenError":
+        console.error("无效token", err);
+        return ctx.app.emit("error", invalidToken, ctx);
+    }
+  }
+  await next();
+};
 
 module.exports = {
   userValidator,
   verifyUser,
   crpytPassword,
   verifyLogin,
+  auth,
 };
