@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 const seq = require("../db/seq");
 const User = require("./user.model");
+const Friend = require("./friend.model");
 
 const Chitchat = seq.define(
   "jstx_chitchat",
