@@ -16,7 +16,6 @@ const Group = seq.define(
     },
     group_cover: {
       type: DataTypes.STRING,
-      allowNull: false,
       comment: "群封面",
     },
     group_affiche: {

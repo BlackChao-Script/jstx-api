@@ -46,4 +46,11 @@ module.exports = {
     message: "获取聊天列表数据失败",
     result: "",
   },
+
+  // 搜索失败
+  searchUsersError: {
+    code: "11010",
+    message: "搜索失败",
+    result: "",
+  },
 };
