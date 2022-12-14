@@ -47,5 +47,6 @@ const User = seq.define(
 );
 
 // User.sync({ alter: true });
+// User.sync({ force: true })
 
 module.exports = User;

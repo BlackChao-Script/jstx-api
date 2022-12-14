@@ -9,30 +9,25 @@ const { userLoginError, getCodeError } = require("../constant/err.type");
 class UserController {
   // 获取邮箱验证码
   async getCode(ctx) {
-    let { email } = ctx.request.query;
+    let mails = ctx.request.query.mail;
+    console.log(mails)
     let emailCode = ("000000" + Math.floor(Math.random() * 999999)).slice(-6);
     const mail = {
       from: "c199188177@163.com",
       subject: "jstx--验证码",
-      to: email,
+      to: mails,
       text: "验证码为：" + emailCode, //发送验证码
     };
-    try {
-      transporter.sendMail(mail, (err, info) => {
-        if (err) {
-          throw console.log(err);
-        }
-      });
-      console.log("发送成功");
-      ctx.body = {
-        code: 0,
-        message: "获取验证码成功",
-        result: emailCode,
-      };
-    } catch (err) {
-      console.error("发送失败");
-      return ctx.app.emit("error", getCodeError, ctx);
-    }
+    transporter.sendMail(mail, (err, info) => {
+      if (!err) {
+        console.log("发送成功");
+      }
+    });
+    ctx.body = {
+      code: 0,
+      message: "获取验证码成功",
+      result: emailCode,
+    };
   }
   // 获取图形验证码
   async getInfoCode(ctx) {
@@ -53,8 +48,8 @@ class UserController {
   }
   // 注册
   async register(ctx) {
-    const { nickname, user_name, password } = ctx.request.body;
-    const res = await createUser(nickname, user_name, password);
+    const { nickname, user_name, password, mail } = ctx.request.body;
+    const res = await createUser(nickname, user_name, password, mail);
     ctx.body = {
       code: 0,
       message: "用户注册成功",

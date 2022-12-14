@@ -1,11 +1,12 @@
 const User = require("../model/user.model");
 
 class UserService {
-  async createUser(nickname, user_name, password) {
+  async createUser(nickname, user_name, password, mail) {
     const res = await User.create({
       nickname,
       user_name,
       password,
+      mail,
     });
     return res.dataValues;
   }
