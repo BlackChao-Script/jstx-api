@@ -6,6 +6,7 @@ class SearchController {
   // 搜索
   async searchUsers(ctx) {
     const { userKeyword } = ctx.request.query;
+    console.log(userKeyword)
     try {
       const res = await searchServiceUsers(userKeyword);
       ctx.body = {

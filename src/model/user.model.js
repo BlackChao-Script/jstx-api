@@ -20,6 +20,11 @@ const User = seq.define(
       allowNull: false,
       comment: "密码",
     },
+    mail: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      comment: "邮箱",
+    },
     sex: {
       type: DataTypes.STRING,
       comment: "性别",

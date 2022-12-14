@@ -40,6 +40,7 @@ module.exports = {
     message: "无效token",
     result: "",
   },
+
   // 聊天错误
   getChitchatError: {
     code: "10010",
@@ -51,6 +52,20 @@ module.exports = {
   searchUsersError: {
     code: "11010",
     message: "搜索失败",
+    result: "",
+  },
+
+  // 朋友信息错误
+  addfriendError: {
+    code: "10020",
+    message: "添加请求失败",
+    result: "",
+  },
+
+  // 获取邮箱验证码失败
+  getCodeError: {
+    code: "10100",
+    message: "获取邮箱验证码失败",
     result: "",
   },
 };

@@ -2,25 +2,37 @@ const jwt = require("jsonwebtoken");
 const svgCaptcha = require("svg-captcha");
 
 const { createUser, getUerInfo } = require("../service/user.service");
-const send_email = require("../constant/own");
+const transporter = require("../constant/own");
 const { JWT_SECRET } = require("../constant/data");
-const { userLoginError } = require("../constant/err.type");
-
-let codeObj = "";
+const { userLoginError, getCodeError } = require("../constant/err.type");
 
 class UserController {
   // 获取邮箱验证码
   async getCode(ctx) {
     let { email } = ctx.request.query;
-    let emailCode = Math.floor(Math.random() * 11000 - 1001);
-    codeObj = emailCode;
+    let emailCode = ("000000" + Math.floor(Math.random() * 999999)).slice(-6);
     const mail = {
       from: "c199188177@163.com",
       subject: "jstx--验证码",
       to: email,
       text: "验证码为：" + emailCode, //发送验证码
     };
-    send_email(mail);
+    try {
+      transporter.sendMail(mail, (err, info) => {
+        if (err) {
+          throw console.log(err);
+        }
+      });
+      console.log("发送成功");
+      ctx.body = {
+        code: 0,
+        message: "获取验证码成功",
+        result: emailCode,
+      };
+    } catch (err) {
+      console.error("发送失败");
+      return ctx.app.emit("error", getCodeError, ctx);
+    }
   }
   // 获取图形验证码
   async getInfoCode(ctx) {
@@ -56,11 +68,12 @@ class UserController {
   async login(ctx) {
     const { user_name } = ctx.request.body;
     try {
-      const { password, ...res } = await getUerInfo({ user_name });
+      const { password, id, ...res } = await getUerInfo({ user_name });
       ctx.body = {
         code: 0,
         message: "用户登录成功",
         result: {
+          id,
           token: jwt.sign(res, JWT_SECRET, { expiresIn: "1d" }),
         },
       };
@@ -69,7 +82,6 @@ class UserController {
       return ctx.app.emit("error", userLoginError, ctx);
     }
   }
-
 }
 
 module.exports = new UserController();

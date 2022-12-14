@@ -11,12 +11,5 @@ const config = {
 };
 // 创建MTP客户端对象
 const transporter = nodemailer.createTransport(config);
-// 发送邮件
-module.exports = function (mail) {
-  transporter.sendMail(mail, (err, info) => {
-    if (err) {
-      return console.log(err);
-    }
-    console.log("发送成功");
-  });
-};
+
+module.exports = transporter

@@ -16,8 +16,7 @@ const Friend = seq.define(
     },
     friend_state: {
       type: DataTypes.TINYINT,
-      allowNull: false,
-      defaultValue: 2,
+      defaultValue: 1,
       comment: "好友状态(0:以为好友; 1:申请中; 2:申请发送方,对方还未同意)",
     },
   },
