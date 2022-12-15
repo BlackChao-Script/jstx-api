@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 const seq = require("../db/seq");
-
+const User = require("../model/user.model");
 const Friend = seq.define(
   "jstx_friend",
   {
@@ -17,7 +17,7 @@ const Friend = seq.define(
     friend_state: {
       type: DataTypes.TINYINT,
       defaultValue: 1,
-      comment: "好友状态(0:以为好友; 1:申请中; 2:申请发送方,对方还未同意)",
+      comment: "好友状态(0:以为好友; 1:申请中;)",
     },
   },
   {
@@ -29,5 +29,11 @@ const Friend = seq.define(
 );
 
 // Friend.sync({ alter: true });
+// Friend.sync({ force: true })
+
+Friend.belongsTo(User, {
+  foreignKey: "friend_id",
+  as: "friend_data",
+});
 
 module.exports = Friend;

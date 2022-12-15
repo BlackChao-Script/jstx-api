@@ -18,6 +18,12 @@ class UserService {
     });
     return res ? res.dataValues : null;
   }
+  async getServiceUserInfo(id) {
+    const res = await User.findOne({
+      where: { id },
+    });
+    return res ? res.dataValues : null;
+  }
 }
 
 module.exports = new UserService();

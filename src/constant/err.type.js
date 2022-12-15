@@ -40,6 +40,11 @@ module.exports = {
     message: "无效token",
     result: "",
   },
+  getUserInfoError: {
+    code: "10019",
+    message: "获取用户信息失败",
+    result: "",
+  },
 
   // 聊天错误
   getChitchatError: {
@@ -59,6 +64,21 @@ module.exports = {
   addfriendError: {
     code: "10020",
     message: "添加请求失败",
+    result: "",
+  },
+  friendAlreadyExited: {
+    code: "10021",
+    message: "好友关系或者申请已存在",
+    result: "",
+  },
+  friendRegisterError: {
+    code: "10022",
+    message: "获取好友关系或者申请错误",
+    result: "",
+  },
+  getFriendApplyError: {
+    code: "10023",
+    message: "获取好友申请列表失败",
     result: "",
   },
 

@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const seq = require("../db/seq");
+const { BASE_PATH } = require("../constant/data");
 
 const User = seq.define(
   "jstx_user",
@@ -31,6 +32,7 @@ const User = seq.define(
     },
     avatar: {
       type: DataTypes.STRING,
+      defaultValue: `${BASE_PATH}user.png`,
       comment: "用户头像",
     },
     signature: {

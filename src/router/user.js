@@ -5,6 +5,7 @@ const {
   getInfoCode,
   register,
   login,
+  getUserInfo,
 } = require("../controller/user.controller");
 const {
   userValidator,
@@ -20,5 +21,7 @@ user.get("/getInfoCode", getInfoCode);
 user.post("/register", userValidator, verifyUser, crpytPassword, register);
 // 登录
 user.post("/login", userValidator, verifyLogin, login);
+// 获取用户信息
+user.get("/getUserInfo", getUserInfo);
 
 module.exports = user;

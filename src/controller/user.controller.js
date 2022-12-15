@@ -1,16 +1,23 @@
 const jwt = require("jsonwebtoken");
 const svgCaptcha = require("svg-captcha");
 
-const { createUser, getUerInfo } = require("../service/user.service");
+const {
+  createUser,
+  getUerInfo,
+  getServiceUserInfo,
+} = require("../service/user.service");
 const transporter = require("../constant/own");
 const { JWT_SECRET } = require("../constant/data");
-const { userLoginError, getCodeError } = require("../constant/err.type");
+const {
+  userLoginError,
+  getCodeError,
+  getUserInfoError,
+} = require("../constant/err.type");
 
 class UserController {
   // 获取邮箱验证码
   async getCode(ctx) {
     let mails = ctx.request.query.mail;
-    console.log(mails)
     let emailCode = ("000000" + Math.floor(Math.random() * 999999)).slice(-6);
     const mail = {
       from: "c199188177@163.com",
@@ -75,6 +82,21 @@ class UserController {
     } catch (err) {
       console.error("用户登录失败", err);
       return ctx.app.emit("error", userLoginError, ctx);
+    }
+  }
+  // 获取用户信息
+  async getUserInfo(ctx) {
+    const { user_id } = ctx.request.query;
+    try {
+      const res = await getServiceUserInfo(user_id);
+      ctx.body = {
+        code: 0,
+        message: "获取用户信息成功",
+        result: res,
+      };
+    } catch (err) {
+      console.error("获取用户信息失败", err);
+      return ctx.app.emit("error", getUserInfoError, cxt);
     }
   }
 }
