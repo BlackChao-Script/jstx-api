@@ -5,6 +5,7 @@ const {
   createUser,
   getUerInfo,
   getServiceUserInfo,
+  updateServiceUser,
 } = require("../service/user.service");
 const transporter = require("../constant/own");
 const { JWT_SECRET } = require("../constant/data");
@@ -12,6 +13,7 @@ const {
   userLoginError,
   getCodeError,
   getUserInfoError,
+  changeUserError,
 } = require("../constant/err.type");
 
 class UserController {
@@ -97,6 +99,21 @@ class UserController {
     } catch (err) {
       console.error("获取用户信息失败", err);
       return ctx.app.emit("error", getUserInfoError, cxt);
+    }
+  }
+  // 修改用户信息
+  async changeUser(ctx) {
+    console.log(ctx.request.body);
+    try {
+      await updateServiceUser(ctx.params.user_id, ctx.request.body);
+      ctx.body = {
+        code: 0,
+        message: "修改用户信息成功",
+        result: "",
+      };
+    } catch (err) {
+      console.error("修改用户信息失败", err);
+      return ctx.app.emit("error", changeUserError, ctx);
     }
   }
 }

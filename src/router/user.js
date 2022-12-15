@@ -6,6 +6,7 @@ const {
   register,
   login,
   getUserInfo,
+  changeUser,
 } = require("../controller/user.controller");
 const {
   userValidator,
@@ -23,5 +24,8 @@ user.post("/register", userValidator, verifyUser, crpytPassword, register);
 user.post("/login", userValidator, verifyLogin, login);
 // 获取用户信息
 user.get("/getUserInfo", getUserInfo);
+// 修改用户信息
+user.put("/modify/:user_id", changeUser);
+
 
 module.exports = user;

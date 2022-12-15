@@ -45,6 +45,11 @@ module.exports = {
     message: "获取用户信息失败",
     result: "",
   },
+  changeUserError: {
+    code: "10100",
+    messahe: "修改用户信息失败",
+    result: "",
+  },
 
   // 聊天错误
   getChitchatError: {
@@ -86,6 +91,18 @@ module.exports = {
   getCodeError: {
     code: "10100",
     message: "获取邮箱验证码失败",
+    result: "",
+  },
+
+  // 上传错误
+  fileUploadTypeError: {
+    code: "11100",
+    message: "不支持该格式的文件",
+    result: "",
+  },
+  fileUploadError: {
+    code: "11101",
+    message: "上传失败",
     result: "",
   },
 };
