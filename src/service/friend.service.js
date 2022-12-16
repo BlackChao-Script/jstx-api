@@ -24,6 +24,9 @@ class FriendService {
     });
     return res;
   }
+  async changServiceFriend(user_id, friend_state) {
+    return await Friend.update({ friend_state }, { where: { user_id } });
+  }
 }
 
 module.exports = new FriendService();

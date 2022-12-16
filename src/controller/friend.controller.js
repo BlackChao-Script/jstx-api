@@ -1,7 +1,12 @@
-const { addfriendError, getFriendApplyError } = require("../constant/err.type");
+const {
+  addfriendError,
+  getFriendApplyError,
+  changFriendError,
+} = require("../constant/err.type");
 const {
   addServiceFriend,
   getServiceFriendApply,
+  changServiceFriend,
 } = require("../service/friend.service");
 
 class friendController {
@@ -30,6 +35,21 @@ class friendController {
     } catch (err) {
       console.error("获取好友申请列表失败", err);
       return ctx.app.emit("error", getFriendApplyError, ctx);
+    }
+  }
+  async changFriend(ctx) {
+    const { user_id } = ctx.request.params;
+    const { friend_state } = ctx.request.body;
+    try {
+      const res = await changServiceFriend(user_id, friend_state);
+      ctx.body = {
+        code: 0,
+        message: "更改申请状态成功",
+        result: res,
+      };
+    } catch (err) {
+      console.error("更改申请状态失败", err);
+      return ctx.app.emit("error", changFriendError, ctx);
     }
   }
 }

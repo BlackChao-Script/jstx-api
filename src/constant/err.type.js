@@ -86,6 +86,11 @@ module.exports = {
     message: "获取好友申请列表失败",
     result: "",
   },
+  changFriendError: {
+    code: "10024",
+    message: "更新好友状态失败",
+    result: "",
+  },
 
   // 获取邮箱验证码失败
   getCodeError: {
