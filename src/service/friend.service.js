@@ -13,9 +13,9 @@ class FriendService {
     });
     return res ? res.dataValues : null;
   }
-  async getServiceFriendApply(user_id) {
+  async getServiceFriendApply(friend_id) {
     const res = await Friend.findAll({
-      where: { user_id },
+      where: { friend_id },
       include: {
         model: User,
         as: "friend_data",

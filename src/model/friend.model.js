@@ -32,7 +32,7 @@ const Friend = seq.define(
 // Friend.sync({ force: true })
 
 Friend.belongsTo(User, {
-  foreignKey: "friend_id",
+  foreignKey: "user_id",
   as: "friend_data",
 });
 
