@@ -11,7 +11,6 @@ class uploadController {
 
     const fileTypes = ["image/jpeg", "image/png"];
     if (file) {
-      console.log(file);
       if (!fileTypes.includes(file.mimetype)) {
         return ctx.app.emit("error", fileUploadTypeError, ctx);
       }
