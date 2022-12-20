@@ -13,6 +13,7 @@ const {
   verifyUser,
   crpytPassword,
   verifyLogin,
+  auth,
 } = require("../middleware/user.middleware");
 // 获取邮箱验证码
 user.get("/getCode", getCode);
@@ -23,9 +24,8 @@ user.post("/register", userValidator, verifyUser, crpytPassword, register);
 // 登录
 user.post("/login", userValidator, verifyLogin, login);
 // 获取用户信息
-user.get("/getUserInfo", getUserInfo);
+user.get("/getUserInfo", auth, getUserInfo);
 // 修改用户信息
-user.put("/modify/:user_id", changeUser);
-
+user.put("/modify/:user_id", auth, changeUser);
 
 module.exports = user;

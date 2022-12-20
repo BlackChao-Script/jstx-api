@@ -57,7 +57,7 @@ const verifyLogin = async (ctx, next) => {
       return ctx.app.emit("error", userNotExistence, ctx);
     }
     if (!bcrypt.compareSync(password, res.password)) {
-      console.log("密码错误");
+      console.log("密码错误");  
       return ctx.app.emit("error", invalidPassword, ctx);
     }
   } catch (err) {

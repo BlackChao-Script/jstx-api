@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const seq = require("../db/seq");
+const { BASE_PATH } = require("../constant/data");
 
 const Group = seq.define(
   "jstx_Group",
@@ -16,6 +17,7 @@ const Group = seq.define(
     },
     group_cover: {
       type: DataTypes.STRING,
+      defaultValue: `${BASE_PATH}user.png`,
       comment: "群封面",
     },
     group_affiche: {
@@ -32,5 +34,6 @@ const Group = seq.define(
 );
 
 // Group.sync({ alter: true });
+// Group.sync({ force: true })
 
 module.exports = Group;

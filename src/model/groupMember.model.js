@@ -27,7 +27,7 @@ const GroupMember = seq.define(
 );
 
 // GroupMember.sync({ alter: true });
-
+// GroupMember.sync({ force: true })
 
 
 GroupMember.belongsTo(Group, {
