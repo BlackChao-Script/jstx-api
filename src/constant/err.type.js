@@ -92,6 +92,13 @@ module.exports = {
     result: "",
   },
 
+  // 群聊错误
+  createGroupError: {
+    code: "10030",
+    message: "创建群聊失败",
+    result: "",
+  },
+
   // 获取邮箱验证码失败
   getCodeError: {
     code: "10100",

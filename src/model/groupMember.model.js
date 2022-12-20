@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const seq = require("../db/seq");
+const Group = require("./group.model");
 
 const GroupMember = seq.define(
   "jstx_GroupMember",
@@ -26,5 +27,12 @@ const GroupMember = seq.define(
 );
 
 // GroupMember.sync({ alter: true });
+
+
+
+GroupMember.belongsTo(Group, {
+  foreignKey: "group_id",
+  as: "group_data",
+});
 
 module.exports = GroupMember;
