@@ -5,6 +5,7 @@ const {
   addfriend,
   getFriendApply,
   changFriend,
+  getState,
 } = require("../controller/friend.controller");
 const { friendValidator } = require("../middleware/friend.middleware");
 const { auth } = require("../middleware/user.middleware");

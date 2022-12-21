@@ -1,8 +1,9 @@
 const User = require("../model/user.model");
 const Group = require("../model/group.model");
+const Friend = require("../model/friend.model");
 
 class SearchService {
-  async searchServiceUsers(value) {
+  async searchServiceUsers(value, user_id) {
     let resObj = {
       user: [],
       group: [],
@@ -17,9 +18,28 @@ class SearchService {
       attributes: ["id", "group_name", "group_cover"],
       where: { group_name },
     });
-    return {
-      resObj,
-    };
+
+    const res = await Friend.findAll();
+    const resData = [];
+    // 与用户相关的好友
+    for (let i of res) {
+      if (i.user_id == user_id || i.friend_id == user_id) {
+        resData.push(i);
+      }
+    }
+    // 查询是否与用户相关
+    let userData = {};
+    for (let v of resObj.user) {
+      userData = resData.find((value) => {
+        return value.user_id == v.id || value.friend_id == v.id;
+      });
+      if (userData) {
+        v.dataValues.friend_state = userData.friend_state;
+      } else {
+        v.dataValues.friend_state = 1;
+      }
+    }
+    return resObj;
   }
 }
 

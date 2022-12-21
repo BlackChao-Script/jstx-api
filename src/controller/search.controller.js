@@ -1,14 +1,12 @@
 const { searchServiceUsers } = require("../service/search.service");
-const { searchUsersError } = require('../constant/err.type')
-
+const { searchUsersError } = require("../constant/err.type");
 
 class SearchController {
   // 搜索
   async searchUsers(ctx) {
-    const { userKeyword } = ctx.request.query;
-    console.log(userKeyword)
+    const { userKeyword, user_id } = ctx.request.query;
     try {
-      const res = await searchServiceUsers(userKeyword);
+      const res = await searchServiceUsers(userKeyword, user_id);
       ctx.body = {
         code: 0,
         messge: "搜索成功",

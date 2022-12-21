@@ -91,6 +91,11 @@ module.exports = {
     message: "更新好友状态失败",
     result: "",
   },
+  getStateError: {
+    code: "10025",
+    message: "查询好友状态失败",
+    result: "",
+  },
 
   // 群聊错误
   createGroupError: {

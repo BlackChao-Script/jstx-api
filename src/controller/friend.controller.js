@@ -2,12 +2,14 @@ const {
   addfriendError,
   getFriendApplyError,
   changFriendError,
+  getStateError,
 } = require("../constant/err.type");
 const {
   addServiceFriend,
   getServiceFriendApply,
   getServiceFriendApplys,
   changServiceFriend,
+  getServiceState,
 } = require("../service/friend.service");
 
 class friendController {
@@ -27,7 +29,7 @@ class friendController {
   async getFriendApply(ctx) {
     const { user_id } = ctx.request.query;
     try {
-      const res = await getServiceFriendApplys(user_id); 
+      const res = await getServiceFriendApplys(user_id);
       ctx.body = {
         code: 0,
         message: "获取好友申请列表成功",
