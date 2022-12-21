@@ -98,6 +98,11 @@ module.exports = {
     message: "创建群聊失败",
     result: "",
   },
+  getGroupListError: {
+    code: "10031",
+    message: "获取群列表数据失败",
+    result: "",
+  },
 
   // 获取邮箱验证码失败
   getCodeError: {

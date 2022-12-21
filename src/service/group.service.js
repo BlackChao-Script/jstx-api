@@ -15,6 +15,16 @@ class groupService {
     }
     return GroupData.dataValues;
   }
+  async getServiceGroupList(user_id) {
+    const res = await GroupMember.findAll({
+      where: { user_id },
+      include: {
+        model: Group,
+        as: "group_data",
+      },
+    });
+    return res
+  }
 }
 
 module.exports = new groupService();
