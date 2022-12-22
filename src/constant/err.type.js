@@ -54,7 +54,12 @@ module.exports = {
   // 聊天错误
   getChitchatError: {
     code: "10010",
-    message: "获取聊天列表数据失败",
+    message: "获取聊天数据失败",
+    result: "",
+  },
+  sendMessageError: {
+    code: "10011",
+    message: "发送聊天信息失败",
     result: "",
   },
 

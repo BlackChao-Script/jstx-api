@@ -23,7 +23,7 @@ class groupService {
         as: "group_data",
       },
     });
-    return res
+    return res;
   }
 }
 

@@ -21,13 +21,11 @@ class SearchService {
 
     const res = await Friend.findAll();
     const resData = [];
-    // 与用户相关的好友
     for (let i of res) {
       if (i.user_id == user_id || i.friend_id == user_id) {
         resData.push(i);
       }
     }
-    // 查询是否与用户相关
     let userData = {};
     for (let v of resObj.user) {
       userData = resData.find((value) => {
